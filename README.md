@@ -141,6 +141,15 @@ dist/
 
 ---
 
+### 🔗 Other extensions by the author
+
+| Extension | Description |
+|---|---|
+| [🧠 Quiz AI Analyzer](https://github.com/fan-world-me/quizai) | Floating AI panel that auto-detects and answers quiz questions on vseosvita.ua, Moodle, Kahoot and more |
+| [⚡ Moodle Auto Relogin](https://github.com/fan-world-me/moodle-autoreconnect) | Keeps your Moodle session alive and silently re-logs you in if it expires |
+
+---
+
 Made with 🩵 in Ukraine 🇺🇦
 
 [![Telegram](https://img.shields.io/badge/Telegram-@fan__world__me-2CA5E0?style=flat-square&logo=telegram)](https://t.me/fan_world_me) [![Discord](https://img.shields.io/badge/Discord-fan__world__me-5865F2?style=flat-square&logo=discord)](https://discord.com/users/1040301536036786248) [![Portfolio](https://img.shields.io/badge/Portfolio-fan--world--me.github.io-00e5ff?style=flat-square&logo=githubpages&logoColor=white)](https://fan-world-me.github.io/)

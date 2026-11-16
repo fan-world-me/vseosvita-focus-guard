@@ -3,6 +3,21 @@
   "name": "Vseosvita Focus Guard",
   "version": "1.5.0",
   "description": "Neutralizes focus and visibility control on vseosvita.ua",
+  "permissions": ["storage", "tabs", "management"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Vseosvita Focus Guard",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "vsg-focus-guard@local",

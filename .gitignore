@@ -1,7 +1,13 @@
 # Build output
 dist/
+*.zip
+*.crx
+*.xpi
 
-# OS
+# Local secrets / environment
+.env
+
+# OS noise
 .DS_Store
 Thumbs.db
 desktop.ini
@@ -15,3 +21,10 @@ desktop.ini
 # Logs
 *.log
 npm-debug.log*
+
+# Dependencies
+node_modules/
+.cache/
+
+# ADB deploy skill (local notes)
+skill.md

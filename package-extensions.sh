@@ -13,7 +13,7 @@ for BROWSER in firefox chrome; do
     UNPACKED="$DIST/$BROWSER-unpacked"
     mkdir -p "$UNPACKED"
 
-    cp "$SRC"/* "$UNPACKED/"
+    cp -r "$SRC"/. "$UNPACKED/"
     cp "$MF/$BROWSER/manifest.json" "$UNPACKED/manifest.json"
 
     ZIP="$DIST/vseosvita-focus-guard-$BROWSER.zip"

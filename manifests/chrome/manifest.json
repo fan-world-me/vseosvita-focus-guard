@@ -3,6 +3,22 @@
   "name": "Vseosvita Focus Guard",
   "version": "1.5.0",
   "description": "Neutralizes focus and visibility control on vseosvita.ua",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmLEHbU+tbN2qjxLq8wdfzebjeee7eDxpjNxbSKYx9fH0jHI50mGr8gce+US8yv8KiZKzMtgfpJ2GXApwmprFxyPmEtnNaUl8/3vBkdyf6fqSXYm6Du4Px0QU+5QU5ISBS8gwkp5krtSQ0vz9cuFQy+twNrRoIbgg25y5mVEE4aPk3vO1ov8J60WsiviCYh1yhTj5q31UxLF/2KYFk+4cbl4Zr+I3uAvel8Wp/dKz5hwSR5VkgaS6hLppZlsGF0MBfKYFdMhTHeuhm2QPjEcUwPM6pcUSVAJA/N3OUWQDsyRrZ84GPQllM57Kfucw83JGPJc+CAMrnKYfIZnDj2mdZwIDAQAB",
+  "permissions": ["storage", "tabs", "management"],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Vseosvita Focus Guard",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
   "content_scripts": [
     {
       "matches": ["*://vseosvita.ua/*", "*://*.vseosvita.ua/*"],

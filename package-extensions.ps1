@@ -13,7 +13,7 @@ foreach ($browser in @('firefox', 'chrome')) {
     New-Item -ItemType Directory -Force -Path $unpacked | Out-Null
 
     # Copy src files
-    Copy-Item "$src\*" $unpacked -Force
+    Copy-Item "$src\*" $unpacked -Recurse -Force
 
     # Drop in browser-specific manifest
     Copy-Item "$mfDir\$browser\manifest.json" "$unpacked\manifest.json" -Force

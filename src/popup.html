@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=340, initial-scale=1.0">
+  <title>Vseosvita Focus Guard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════
+       Vseosvita Focus Guard — Popup
+       Dark + Glassmorphism + Cyan accent
+       ══════════════════════════════════════ */
+
+    :root {
+      --bg:           #040e16;
+      --accent:       #00c8ff;
+      --accent-dim:   rgba(0, 200, 255, 0.18);
+      --accent-border:rgba(0, 200, 255, 0.30);
+      --surface:      rgba(255, 255, 255, 0.045);
+      --surface-high: rgba(255, 255, 255, 0.07);
+      --outline:      rgba(0, 200, 255, 0.18);
+      --outline-dim:  rgba(255, 255, 255, 0.08);
+      --text:         #e8f4fb;
+      --text-dim:     rgba(232, 244, 251, 0.55);
+      --radius-sm:    12px;
+      --radius-md:    16px;
+      --radius-lg:    20px;
+      --radius-full:  999px;
+      --glass:        blur(20px) saturate(180%);
+      --shadow:       0 8px 32px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255,255,255,0.05) inset;
+      --ease-spring:  cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-std:     cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { min-width: 340px; width: 340px; }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.5 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-width: 340px;
+      width: 340px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 45% at 15% 10%, rgba(0,200,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 85% 85%, rgba(0,120,200,0.10) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      animation: shellIn 400ms var(--ease-spring) both;
+    }
+
+    @keyframes shellIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.97); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(6px) scale(0.98); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── Header ── */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: var(--radius-lg);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow);
+      animation: cardIn 400ms var(--ease-spring) 40ms both;
+    }
+
+    .header-icon {
+      font-size: 26px;
+      flex: none;
+      line-height: 1;
+      filter: drop-shadow(0 0 10px rgba(0,200,255,0.6));
+      animation: iconGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes iconGlow {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(0,200,255,0.4)); }
+      50%       { filter: drop-shadow(0 0 16px rgba(0,200,255,0.9)); }
+    }
+
+    .header-text { flex: 1; min-width: 0; }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+      background: linear-gradient(90deg, #00c8ff 0%, #80e8ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin: 3px 0 0;
+    }
+
+    .header-badge {
+      flex: none;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    /* ── Toggle card ── */
+    .toggle-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-lg);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow);
+      animation: cardIn 400ms var(--ease-spring) 80ms both;
+      transition: background 250ms var(--ease-std), border-color 250ms var(--ease-std);
+      cursor: pointer;
+    }
+
+    .toggle-card.off {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--outline-dim);
+    }
+
+    .toggle-text { display: flex; flex-direction: column; gap: 3px; }
+
+    .toggle-label {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .toggle-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      transition: color 250ms var(--ease-std);
+    }
+
+    .toggle-sub.active { color: var(--accent); }
+
+    /* MD3-style switch */
+    .switch {
+      position: relative;
+      flex: none;
+      display: block;
+      width: 52px;
+      height: 32px;
+      cursor: pointer;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+    .track {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.18);
+      transition: background 250ms var(--ease-std), border-color 250ms var(--ease-std), box-shadow 250ms var(--ease-std);
+    }
+
+    .switch input:checked ~ .track {
+      background: linear-gradient(135deg, #0090c8, #00c8ff);
+      border-color: transparent;
+      box-shadow: 0 0 18px rgba(0,200,255,0.55);
+    }
+
+    .thumb {
+      position: absolute;
+      top: 50%;
+      left: 4px;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.35);
+      transition: left 250ms var(--ease-spring), background 250ms var(--ease-std), box-shadow 250ms var(--ease-std);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+
+    .switch input:checked ~ .track .thumb {
+      left: 28px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,200,255,0.5);
+    }
+
+    /* ── Projects section ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 0 2px;
+      margin-bottom: -2px;
+      animation: cardIn 400ms var(--ease-spring) 110ms both;
+    }
+
+    .project-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--outline-dim);
+      border-radius: var(--radius-md);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      transition: background 200ms var(--ease-std), border-color 200ms var(--ease-std), transform 200ms var(--ease-spring);
+      animation: cardIn 400ms var(--ease-spring) 130ms both;
+      cursor: pointer;
+    }
+
+    .project-card:nth-child(2) { animation-delay: 150ms; }
+
+    .project-card:hover {
+      background: var(--surface-high);
+      border-color: var(--accent-border);
+      transform: translateY(-2px);
+    }
+
+    .project-card:active { transform: scale(0.98); }
+
+    .project-emoji {
+      font-size: 20px;
+      line-height: 1;
+      flex: none;
+      margin-top: 1px;
+    }
+
+    .project-body { flex: 1; min-width: 0; }
+
+    .project-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .project-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.35;
+    }
+
+    .project-arrow {
+      flex: none;
+      color: var(--accent);
+      opacity: 0.6;
+      font-size: 14px;
+      margin-top: 2px;
+      transition: opacity 200ms, transform 200ms var(--ease-spring);
+    }
+
+    .project-card:hover .project-arrow {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      display: flex;
+      gap: 8px;
+      animation: cardIn 400ms var(--ease-spring) 200ms both;
+    }
+
+    .footer-chip {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 10px;
+      background: var(--surface);
+      border: 1px solid var(--outline-dim);
+      border-radius: var(--radius-md);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-decoration: none;
+      backdrop-filter: var(--glass);
+      transition: background 200ms var(--ease-std), border-color 200ms var(--ease-std), color 200ms var(--ease-std);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .footer-chip:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent-border);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-icon">🛡️</div>
+      <div class="header-text">
+        <h1 class="header-title">Vseosvita Focus Guard</h1>
+        <p class="header-sub">vseosvita.ua</p>
+      </div>
+      <span class="header-badge" id="versionBadge">v1.5</span>
+    </div>
+
+    <!-- TOGGLE -->
+    <div class="toggle-card" id="toggleCard">
+      <div class="toggle-text">
+        <span class="toggle-label">Захист вкладки</span>
+        <span class="toggle-sub" id="toggleSub">Завантаження…</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="enabledToggle">
+        <span class="track">
+          <span class="thumb"></span>
+        </span>
+      </label>
+    </div>
+
+    <!-- OTHER PROJECTS -->
+    <div class="section-label">Інші проєкти автора</div>
+
+    <a id="proj-quaz" class="project-card"
+       href="https://github.com/fan-world-me/quaz_ai"
+       target="_blank"
+       rel="noopener noreferrer">
+      <span class="project-emoji">🤖</span>
+      <div class="project-body">
+        <p class="project-name">Quiz AI Analyzer</p>
+        <span class="project-desc">ІІ-аналіз тестів на vseosvita, Moodle, Kahoot та ін.</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <a id="proj-moodle" class="project-card"
+       href="https://github.com/fan-world-me/moodle-autoreconnect"
+       target="_blank"
+       rel="noopener noreferrer">
+      <span class="project-emoji">🔄</span>
+      <div class="project-body">
+        <p class="project-name">Moodle Auto Relogin</p>
+        <span class="project-desc">Тримає сесію Moodle живою, автологін</span>
+      </div>
+      <span class="project-arrow">↗</span>
+    </a>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <a class="footer-chip"
+         href="https://fan-world-me.github.io/"
+         target="_blank"
+         rel="noopener noreferrer">
+        🌐 Сайт автора
+      </a>
+      <a class="footer-chip"
+         href="https://github.com/fan-world-me"
+         target="_blank"
+         rel="noopener noreferrer">
+        🐙 @fan-world-me
+      </a>
+    </div>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
