@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Vseosvita Focus Guard",
+  "version": "1.5.0",
+  "description": "Neutralizes focus and visibility control on vseosvita.ua",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "vsg-focus-guard@local",
+      "strict_min_version": "115.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://vseosvita.ua/*", "*://*.vseosvita.ua/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": ["content.js"]
+}

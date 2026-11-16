@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Vseosvita Focus Guard",
+  "version": "1.5.0",
+  "description": "Neutralizes focus and visibility control on vseosvita.ua",
+  "content_scripts": [
+    {
+      "matches": ["*://vseosvita.ua/*", "*://*.vseosvita.ua/*"],
+      "js": ["inject.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content.js"],
+      "matches": ["*://vseosvita.ua/*", "*://*.vseosvita.ua/*"]
+    }
+  ]
+}
